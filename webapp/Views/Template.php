@@ -1,9 +1,13 @@
 <?php
-Class Template {
+class Template {
     private $templateFile;
     private $data = [];
 
-    public function __construct($templateFile) {
+    public function __construct() { 
+        
+    }
+
+    public function setTemplateFile($templateFile){
         $this->templateFile = $templateFile;
     }
 
@@ -18,9 +22,8 @@ Class Template {
 
         return $this->data[$key];
     }
-
     public function output() {
-        $templateContent = file_get_contents($this->templateFile);
+        $templateContent = file_get_contents(dirname(__FILE__).'/'.$this->templateFile);
 
         foreach ($this->data as $key => $value) {
             $templateContent = str_replace("::$key", $value, $templateContent);
@@ -28,5 +31,7 @@ Class Template {
 
         return $templateContent;
     }
+
+    
 }
 ?>
