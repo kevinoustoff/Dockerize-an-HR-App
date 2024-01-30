@@ -26,10 +26,20 @@ class Template {
         $templateContent = file_get_contents(dirname(__FILE__).'/'.$this->templateFile);
 
         foreach ($this->data as $key => $value) {
-            $templateContent = str_replace("::$key", $value, $templateContent);
-        }
 
-        return $templateContent;
+            if (is_array($value)) {
+                // Use a different placeholder for arrays, e.g., ::hi_array
+                $value = json_encode($value);
+                $templateContent = str_replace("::$key", $value, $templateContent);
+            } else{
+                $templateContent = str_replace("::$key", $value, $templateContent);
+            }
+           
+        }
+        //echo $templateContent;
+         //die();
+         eval('?>'.$templateContent.'<?php ');
+        
     }
 
     

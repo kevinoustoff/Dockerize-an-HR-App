@@ -7,5 +7,14 @@
 </head>
 <body>
     <h1>::hello</h1>
+    <ul>
+        <?php if (count(::hi) > 0)
+         echo 'test statements'
+        ?>
+    <?php foreach( ::hi as $item): ?>
+            <li><?= $item ?></li>
+    <?php endforeach ?>
+    </ul>
+    
 </body>
 </html>
