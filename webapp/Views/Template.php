@@ -32,31 +32,24 @@ class Template {
     }
     public function output() {
         $templateContent = file_get_contents(dirname(__FILE__).'/'.$this->templateFile);
-        $childTemplateContent = file_get_contents(dirname(__FILE__).'/'.$this->templateFile);
-        // Find and extract the @extends directive
-        preg_match('/@extends\((.*?)\)/', $childTemplateContent, $matches);
-        $extendedFileName = $this->getExtendedFileName($matches[1]);
-        echo $matches[0];
-        die(); 
-
-        
-
+        preg_match('/@extends\((.*?)\)/', $templateContent, $matches);
+        $templateContent = preg_replace('/@extends\((.*?)\)/', '', $templateContent);
+        if(count($matches)){
+            $extendedFileName = $this->getExtendedFileName($matches[1]);
+            echo $extendedFileName;
+            $extendedFileContent = file_get_contents(dirname(__FILE__).'/'.$extendedFileName);
+            $templateContent = str_replace('@content',$templateContent , $extendedFileContent);
+        }
         foreach ($this->data as $key => $value) {
-
             if (is_array($value)) {
                 $value = json_encode($value);
                 $templateContent = str_replace("::$key", $value, $templateContent);
             } else{
                 $templateContent = str_replace("::$key", $value, $templateContent);
-            }
-           
+            }  
         }
-        //echo $templateContent;
-         //die();
          eval('?>'.$templateContent.'<?php ');
         
-    }
-
-    
+    }  
 }
 ?>
