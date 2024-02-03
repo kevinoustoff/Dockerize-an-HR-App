@@ -1,6 +1,9 @@
 <?php
- include_once dirname(dirname(__FILE__)).'/Routes/Routes.php';
+require dirname(dirname(__FILE__)).'/vendor/autoload.php';
 
+ use Routes\Processor;
+
+$pr = new Processor();
  $rootFolder = dirname(dirname(__FILE__));
 
 ?>

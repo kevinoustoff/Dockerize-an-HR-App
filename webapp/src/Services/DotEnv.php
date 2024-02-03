@@ -1,8 +1,8 @@
 <?php
+namespace UHA\Services;
+use UHA\Services\Database;
 
-class DotEnv{
-
-    
+class DotEnv{    
     public function __construct(){
         
     }

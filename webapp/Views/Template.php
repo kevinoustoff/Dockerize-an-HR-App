@@ -1,4 +1,6 @@
 <?php
+namespace Views;
+
 class Template {
     private $templateFile;
     private $data = [];

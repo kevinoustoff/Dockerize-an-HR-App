@@ -1,4 +1,6 @@
 <?php
+   namespace UHA\Models;
+   
    class Model{
         // private $conn;
 

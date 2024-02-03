@@ -1,0 +1,20 @@
+{
+    "name": "user/webapp",
+    "description": "uha architecture ntiers",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "UHA\\": "src/",
+            "Http\\": "http/",
+            "Routes\\":"Routes/",
+            "Views\\":"Views/"
+        }
+    },
+    "authors": [
+        {
+            "name": "kevinoustoff",
+            "email": "35457309+kevinoustoff@users.noreply.github.com"
+        }
+    ],
+    "require": {}
+}

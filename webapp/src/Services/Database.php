@@ -1,4 +1,6 @@
 <?php
+namespace UHA\Services;
+use \PDO;
 
 class Database
 {
