@@ -10,7 +10,6 @@ public $table = 'employee';
 public function  __construct(){
    $database = new Database();
    $this->pdo =  $database->getPDO();
-   //print_r($database->getPDO());
 }
 
 public function getAll(){
@@ -21,10 +20,7 @@ public function getAll(){
     $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
     // Display the result
     return $result;
- }
-
-   
-
+}
 
 /**
  * Get the value of table
