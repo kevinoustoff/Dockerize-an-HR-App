@@ -1,9 +1,7 @@
 <?php
 require dirname(dirname(__FILE__)).'/vendor/autoload.php';
-
- use Routes\Processor;
+use Routes\Processor;
 
 $pr = new Processor();
- $rootFolder = dirname(dirname(__FILE__));
-
+$rootFolder = dirname(dirname(__FILE__));
 ?>

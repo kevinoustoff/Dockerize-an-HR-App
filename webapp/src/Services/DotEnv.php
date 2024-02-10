@@ -8,7 +8,8 @@ class DotEnv{
     }
     public function parseEnv()
     {
-        $data = file_get_contents('');
+        echo dirname(dirname(__FILE__)).'/.env';
+        $data = file_get_contents(dirname(dirname(dirname(__FILE__))).'/.env');
         $lines = explode("\n", $data);
         $envVariables = [];
         foreach ($lines as $line) {

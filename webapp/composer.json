@@ -16,5 +16,10 @@
             "email": "35457309+kevinoustoff@users.noreply.github.com"
         }
     ],
-    "require": {}
+    "require": {
+        "doctrine/orm": "^2.18",
+        "symfony/cache": "^5.4",
+        "doctrine/annotations": "^1.0",
+        "doctrine/lexer": "^2.0"
+    }
 }
