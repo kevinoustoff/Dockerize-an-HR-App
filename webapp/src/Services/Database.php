@@ -30,9 +30,10 @@ class Database
             'useSimpleAnnotationReader' => false,
 
         ];
+
+        
         $paths = [dirname(dirname(__FILE__)).'\Models'];
 
-        echo $paths[0];
         $isDevMode = false;
         $config = \Doctrine\ORM\Tools\Setup::createAnnotationMetadataConfiguration(
             $paths,
@@ -55,11 +56,15 @@ class Database
     public function getPDO()
     {
         try {
-            $pdo = new PDO("mysql:host=".$this->dbParams['DB_HOST'].";port=".$this->dbParams['DB_PORT'].";dbname=".$this->dbParams['DB_NAME'].";charset=utf8", $this->dbParams['DB_USERNAME'], $this->dbParams['DB_PASSWORD']);
+        $pdo = new PDO(
+            "mysql:host={$this->dotEnv['DB_HOST']};port={$this->dotEnv['DB_PORT']};dbname={$this->dotEnv['DB_NAME']};charset=utf8",
+            $this->dotEnv['DB_USERNAME'],
+            $this->dotEnv['DB_PASSWORD']
+        );
             // Set PDO to throw exceptions on errors
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            echo 'connection';
-            // return $pdo;
+            //echo 'connection';
+             return $pdo;
         } catch (\PDOException $e) {
             echo "Connection failed: " . $e->getMessage();
         }

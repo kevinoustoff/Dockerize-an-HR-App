@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="users")
  */
-class User 
+class User extends Model
 {
     /**
      * @ORM\Id
@@ -20,7 +20,17 @@ class User
      */
     private $username;
 
+    
+
     // Other properties and methods...
+
+    public function __construct()
+    {
+        parent::__construct();
+        // $this->table = "employee";
+        // self::$table = "employee";
+        $this->setTable("employee");
+    }
 
     /**
      * Get the value of username

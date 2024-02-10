@@ -1,25 +1,40 @@
 <?php
    namespace UHA\Models;
+
+use UHA\Services\Database;
+
+abstract class Model{
+   protected static $pdo;
+   protected $table; 
+
+   public function  __construct(){
+      $database = new Database();
+      self::$pdo =  $database->getPDO();
+      print_r($database->getPDO());
+   }
+
    
-   class Model{
-      //   private $conn;
-
-      //   public function  __construct(){
-      //       $this->conn = new mysqli($host, $username, $password, $database);
-
-      //       if ($this->conn->connect_error) {
-      //           die("Connection failed: " . $this->conn->connect_error);
-      //       }
-      //   }
-
-      //   public function save($modelInstance) {
-      //       $fields = implode(", ", array_keys($modelInstance::$fields));
-      //       $values = implode("', '", array_values($modelInstance->toArray()));
-    
-      //       $query = "INSERT INTO {$modelInstance::$tableName} ($fields) VALUES ('$values')";
-      //       $this->conn->query($query);
-      //   }
       
 
+
+   /**
+    * Get the value of table
+    */ 
+   public function getTable()
+   {
+      return $this->table;
    }
+
+   /**
+    * Set the value of table
+    *
+    * @return  self
+    */ 
+   public function setTable($table)
+   {
+      $this->table = $table;
+
+      return $this;
+   }
+}
 ?>

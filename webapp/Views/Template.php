@@ -38,7 +38,7 @@ class Template {
         $templateContent = preg_replace('/@extends\((.*?)\)/', '', $templateContent);
         if(count($matches)){
             $extendedFileName = $this->getExtendedFileName($matches[1]);
-            echo $extendedFileName;
+            //echo $extendedFileName;
             $extendedFileContent = file_get_contents(dirname(__FILE__).'/'.$extendedFileName);
             $templateContent = str_replace('@content',$templateContent , $extendedFileContent);
         }

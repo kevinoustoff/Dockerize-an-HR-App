@@ -1,6 +1,9 @@
 <?php
     namespace UHA\Controllers;
     use UHA\Controllers\Controller;
+use UHA\Models\User;
+use UHA\Repositories\UserRepository;
+
     class EmployeeController extends Controller {
         public function list(){
             $holla = ['fin','ger','l'];
@@ -11,6 +14,8 @@
         }
 
         public function testContent(){
+            $user = new UserRepository();
+            $user->getAll();
             $this->view->setTemplateFile('index.phtml');
             return $this->view->output();
         }
