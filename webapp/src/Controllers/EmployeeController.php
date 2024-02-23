@@ -7,7 +7,7 @@ use UHA\Repositories\UserRepository;
     class EmployeeController extends Controller {
         public function list(){
             $holla = ['fin','ger','l'];
-            $this->view->setTemplateFile('base.phtml');
+            $this->view->setTemplateFile('listEmployee.phtml');
             $this->view->set('hello','he');
             $this->view->set('hi',$holla);
             return $this->view->output();
