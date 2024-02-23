@@ -59,6 +59,7 @@ class User extends Model
     {
         return $this->id;
     }
+
 }
 
 
