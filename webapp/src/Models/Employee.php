@@ -15,6 +15,10 @@ class Employee extends Model{
         return $this->repository->getAll();
     }
 
+    public function addEmployee(){
+        
+    }
+
     
     
 }

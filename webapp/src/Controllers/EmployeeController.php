@@ -10,8 +10,6 @@
             $holla = ['fin','ger','l'];
             $employee = new Employee();
             $employees = $employee->getAll();
-
-            // print_r($employees[0]->FirstName);
             $this->view->setTemplateFile('listEmployee.phtml');
             $this->view->set('hello','he');
             $this->view->set('hi',$holla);

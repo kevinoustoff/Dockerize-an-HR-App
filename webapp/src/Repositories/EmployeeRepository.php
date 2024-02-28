@@ -8,6 +8,9 @@ class EmployeeRepository extends Repository{
         parent::__construct($name);
     }
 
+    public function addEmployee(){
+        
+    }
     public function getAll(){
         try {
             $pdo = $this->database->getPDO();
