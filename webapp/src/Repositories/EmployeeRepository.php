@@ -31,25 +31,14 @@ class EmployeeRepository extends Repository{
     }
 
     public function findOneById($id){
-        try {
-            $pdo = $this->database->getPDO();
-            $this->table;
-            $query = "SELECT c.Title, c.FirstName, c.LastName, EDH.ShiftID, DEP.Name,c.EmailAddress,c.Phone ,EDH.StartDate,".$this->table.".Title 
-            FROM ".$this->table." 
-            INNER JOIN contact c ON c.ContactID = ".$this->table.".ContactID 
-            INNER JOIN employeedepartmenthistory AS EDH ON EDH.EmployeeID = ".$this->table.".EmployeeID 
-            INNER JOIN department AS DEP ON DEP.DepartmentID = EDH.DepartmentID
-            WHERE ".$this->table.".EmployeeID = ".$id." ORDER BY EDH.ShiftID DESC LIMIT 1";
+        $query = "SELECT c.Title, c.FirstName, c.LastName, EDH.ShiftID, DEP.Name,c.EmailAddress,c.Phone ,EDH.StartDate,".$this->table.".Title 
+        FROM ".$this->table." 
+        INNER JOIN contact c ON c.ContactID = ".$this->table.".ContactID 
+        INNER JOIN employeedepartmenthistory AS EDH ON EDH.EmployeeID = ".$this->table.".EmployeeID 
+        INNER JOIN department AS DEP ON DEP.DepartmentID = EDH.DepartmentID
+        WHERE ".$this->table.".EmployeeID = ".$id." ORDER BY EDH.ShiftID DESC LIMIT 1";
 
-            $statement = $pdo->prepare($query);
-            $statement->execute();
-            
-            // Fetch all rows as object class 
-            $result = $statement->fetch(PDO::FETCH_OBJ);
-            return $result;
-        } catch (\PDOException $e) {
-            echo "Query failed: " . $e->getMessage();
-        }            
+        return $this->find($query);
     }
 } 
 
