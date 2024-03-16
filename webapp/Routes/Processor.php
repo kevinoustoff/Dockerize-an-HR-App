@@ -10,6 +10,9 @@
             $router->addRoute('GET', '/employee', function () {
                 return (new EmployeeController())->list();
             });
+            $router->addRoute('GET','/employee/{id}', function($id){
+                return (new EmployeeController())->getSingleEmployee($id);
+            });
             $router->addRoute('GET', '/employee/test', function () {
                 return (new EmployeeController())->testContent();
             });

@@ -15,8 +15,8 @@ class Employee extends Model{
         return $this->repository->getAll();
     }
 
-    public function addEmployee(){
-        
+    public function find($id){
+        return $this->repository->findOneById($id);
     }
 
     

@@ -17,6 +17,14 @@
             return $this->view->output();
         }
 
+        public function getSingleEmployee($id){
+            $employee = new Employee();
+            $employee = $employee->find($id);
+            $this->view->setTemplateFile('detailsEmployee.phtml');
+            $this->view->set('employee',$employee);
+            return $this->view->output();
+        }
+
         public function testContent(){
             $user = new UserRepository();
             $user->getAll();

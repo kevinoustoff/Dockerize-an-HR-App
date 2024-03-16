@@ -45,9 +45,9 @@ class Template {
         foreach ($this->data as $key => $value) {
             if (is_array($value)) {
                 $value = json_encode($value);
-                $templateContent = str_replace("::$key", $value, $templateContent);
+                // $templateContent = str_replace("::$key", $value, $templateContent);
             } else{
-                $templateContent = str_replace("::$key", $value, $templateContent);
+                // $templateContent = str_replace("::$key", $value, $templateContent);
             }  
         }
          eval('?>'.$templateContent.'<?php ');
