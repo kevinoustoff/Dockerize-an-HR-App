@@ -27,6 +27,25 @@ abstract class Repository{
         }
     }
 
+    private function execute($query){
+        $pdo = $this->database->getPDO();
+        $this->table;
+        $statement = $pdo->prepare($query);
+        $statement->execute();
+
+        return $statement;
+}
+
+    public function edit($query){
+        try {
+            $statement = $this->execute($query);
+            $rowCount = $statement->rowCount();
+            return $rowCount > 0 ;
+        } catch (\PDOException $e) {
+            echo "Query failed: " . $e->getMessage();
+        }
+    }
+
 
     
 }

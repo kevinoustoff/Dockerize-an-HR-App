@@ -19,6 +19,10 @@ class Employee extends Model{
         return $this->repository->findOneById($id);
     }
 
+    public function edit($id,$data){
+        return $this->repository->editEmployee($id,$data);
+    }
+
     
     
 }

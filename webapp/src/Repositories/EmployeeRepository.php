@@ -9,7 +9,6 @@ class EmployeeRepository extends Repository{
     }
 
     public function addEmployee(){
-        
     }
     public function getAll(){
         try {
@@ -31,15 +30,31 @@ class EmployeeRepository extends Repository{
     }
 
     public function findOneById($id){
-        $query = "SELECT c.Title, c.FirstName, c.LastName, EDH.ShiftID, DEP.Name,c.EmailAddress,c.Phone ,EDH.StartDate,".$this->table.".Title 
+        $query = "SELECT emp.EmployeeID as empID ,c.ContactID, c.Title, c.FirstName, c.LastName, EDH.ShiftID, DEP.Name,c.EmailAddress,c.Phone ,EDH.StartDate,emp.Title 
         FROM ".$this->table." 
-        INNER JOIN contact c ON c.ContactID = ".$this->table.".ContactID 
-        INNER JOIN employeedepartmenthistory AS EDH ON EDH.EmployeeID = ".$this->table.".EmployeeID 
+         as emp INNER JOIN contact c ON c.ContactID = emp.ContactID 
+        INNER JOIN employeedepartmenthistory AS EDH ON EDH.EmployeeID = emp.EmployeeID 
         INNER JOIN department AS DEP ON DEP.DepartmentID = EDH.DepartmentID
-        WHERE ".$this->table.".EmployeeID = ".$id." ORDER BY EDH.ShiftID DESC LIMIT 1";
+        WHERE emp.EmployeeID = ".$id." ORDER BY EDH.ShiftID DESC LIMIT 1";
 
         return $this->find($query);
     }
+
+    public function editEmployee($id,$data){
+        $query = "UPDATE " . $this->table . " 
+        INNER JOIN contact c ON c.ContactID = " . $this->table . ".ContactID 
+        SET 
+        c.FirstName = '" . $data["firstname"] . "', 
+        c.LastName = '" . $data["lastname"] . "', 
+        c.EmailAddress = '" . $data["email"] . "', 
+        c.Phone = '" . $data["phone"] . "' 
+        WHERE ".$this->table.".EmployeeID = " . $id;
+        return $this->edit($query);
+
+    }
+    
+
+
 } 
 
 ?>

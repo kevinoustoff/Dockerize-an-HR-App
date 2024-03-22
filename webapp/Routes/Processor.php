@@ -7,11 +7,14 @@
         public function __construct()
         {
             $router = new Web();
-            $router->addRoute('GET', '/employee', function () {
+            $router->addRoute('GET', '/employees', function () {
                 return (new EmployeeController())->list();
             });
             $router->addRoute('GET','/employee/{id}', function($id){
                 return (new EmployeeController())->getSingleEmployee($id);
+            });
+            $router->addRoute('POST','/edit-employees/{id}', function($id){
+                return (new EmployeeController())->editEmploye($id);
             });
             $router->addRoute('GET', '/employee/test', function () {
                 return (new EmployeeController())->testContent();
