@@ -12,15 +12,8 @@ class EmployeeRepository extends Repository{
     }
     public function getAll(){
         try {
-            $pdo = $this->database->getPDO();
-            $this->table;
-            
             $query = "SELECT * FROM ".$this->table." INNER JOIN contact ON contact.ContactID=".$this->table.".ContactID";
-            
-            // Prepare and execute the query
-            $statement = $pdo->prepare($query);
-            $statement->execute();
-            
+            $statement = $this->execute($query);
             // Fetch all rows as object class 
             $result = $statement->fetchAll(PDO::FETCH_CLASS, 'UHA\Models\Employee');
             return $result;
@@ -50,7 +43,6 @@ class EmployeeRepository extends Repository{
         c.Phone = '" . $data["phone"] . "' 
         WHERE ".$this->table.".EmployeeID = " . $id;
         return $this->edit($query);
-
     }
     
 

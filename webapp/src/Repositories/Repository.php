@@ -15,11 +15,7 @@ abstract class Repository{
 
     public function find($query){
         try {
-            $pdo = $this->database->getPDO();
-            $this->table;
-            $statement = $pdo->prepare($query);
-            $statement->execute();
-            // Fetch all rows as object class 
+            $statement = $this->execute($query);
             $result = $statement->fetch(\PDO::FETCH_OBJ);
             return $result;
         } catch (\PDOException $e) {
@@ -27,7 +23,7 @@ abstract class Repository{
         }
     }
 
-    private function execute($query){
+    public function execute($query){
         $pdo = $this->database->getPDO();
         $this->table;
         $statement = $pdo->prepare($query);

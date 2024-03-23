@@ -3,13 +3,27 @@ namespace UHA\Routing;
 
 class Web {
     protected $routes = [];
-
+    protected $currentPrefix = '';
     public function addRoute(string $method, string $url, \Closure $target) {
+        $url = $this->currentPrefix . $url;
         // Use regular expression to match parameters in the URL
         $pattern = preg_replace('#/{(\w+)}#', '/(?<$1>[^/]+)', $url);
         $pattern = '#^' . $pattern . '$#';
 
         $this->routes[$method][$pattern] = $target;
+    }
+
+    public function addPrefix(string $prefix, \Closure $callback) {
+        
+        $previousPrefix = $this->currentPrefix;
+
+        $this->currentPrefix .= $prefix;
+
+        
+        $callback();
+
+        // Restore the previous prefix
+        $this->currentPrefix = $previousPrefix;
     }
 
     public function processRequest() {
@@ -24,8 +38,14 @@ class Web {
                     array_shift($matches);
 
                     // Call the target closure with parameters
-                    echo call_user_func_array($target, $matches);
-                    exit;
+                    if($this->currentPrefix != "/api"){
+                        echo call_user_func_array($target, $matches);
+                        exit;
+                    }
+                    else{
+                        return call_user_func_array($target,$matches);
+                    }
+                    
                 }
             }
         }
