@@ -5,20 +5,29 @@
     use UHA\Models\User;
     use UHA\Repositories\UserRepository;
 
-    class EmployeeController extends Controller {
+    class EmployeeController  {
         private $employe;
 
 
         public function __construct()
-        {
-            parent::__construct();
+        { 
             $this->employe = new Employee();
+        }
+
+        public function getListeEmployee(){
+            $employee = new Employee();
+            $liste = $employee->getAll();
+            $response = json_encode($liste);
+            header("Content-Type: application/json");
+            return $response;
         }
         
         public function getSingleEmployee($id){
             $employee = new Employee();
             $employee = $employee->find($id);
             $response = json_encode($employee);
+
+            header("Content-Type: application/json");
             return $response;
         }
     }

@@ -13,6 +13,9 @@
                 $router->addRoute('GET', '/employee/{id}', function($id) {
                     return (new ApiEmployeeController())->getSingleEmployee($id);
                 });
+                $router->addRoute('GET', '/employees', function() {
+                    return (new ApiEmployeeController())->getListeEmployee();
+                });
             });
             $router->processRequest();
         }
