@@ -1,0 +1,31 @@
+FROM php:8.2-apache
+
+WORKDIR /var/www/html
+
+# Installer les dépendances requises
+RUN apt-get update && apt-get install -y \
+    git \
+    curl \
+    unzip \
+    zip \
+    libzip-dev \
+    && docker-php-ext-install pdo pdo_mysql mysqli \
+    && a2enmod rewrite
+
+# Copier uniquement composer.json avant le composer install
+COPY composer.json composer.lock ./
+
+# Installer composer et les dépendances
+RUN curl -sS https://getcomposer.org/installer | php \
+    && mv composer.phar /usr/local/bin/composer \
+    && composer install --no-interaction --no-scripts
+
+# Copier le reste du projet
+COPY . .
+
+# Régénérer l’autoload (pour le code copié après)
+RUN composer dump-autoload --optimize
+
+RUN chown -R www-data:www-data /var/www/html
+
+EXPOSE 80

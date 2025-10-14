@@ -26,7 +26,7 @@ class Database
             'user'     => $this->dotEnv['DB_USERNAME'],
             'password' => $this->dotEnv['DB_PASSWORD'],
             'dbname'   => $this->dotEnv['DB_NAME'],
-            'port'     => '3307',
+            'port'     => '3308',
             'useSimpleAnnotationReader' => false,
 
         ];
