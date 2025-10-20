@@ -6,15 +6,22 @@
     use UHA\Repositories\UserRepository;
 
     class EmployeeController extends Controller {
-        private $employe;
+        
 
-
+        /**
+         * @return void
+         */
         public function __construct()
         {
             parent::__construct();
-            $this->employe = new Employee();
         }
         
+        /**
+         * Récupère un employé par son ID et retourne la réponse en JSON.
+         *
+         * @param int $id
+         * @return string JSON représentant l'employé, ou '{}' si non trouvé
+         */
         public function getSingleEmployee($id){
             $employee = new Employee();
             $employee = $employee->find($id);

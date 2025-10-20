@@ -4,7 +4,7 @@
     use Http\Web;
     
     class Controller{
-        protected $view;
+        protected Template $view;
         public function __construct()
         {
             $this->view = new Template();

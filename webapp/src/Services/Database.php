@@ -7,15 +7,13 @@ use Doctrine\ORM\ORMSetup;
 
 class Database
 {
-    private $driver;
-    private $user;
-    private $password;
-    private $dbname;
-    private static $instance;
-    private $connection;
-    private $dotEnv;
-    private $entityManager;
-    private $dbParams;
+    
+    
+    private static ?self $instance = null;         
+    private ?\Doctrine\DBAL\Connection $connection = null;
+    /** @var array<string, string> */ 
+    private array $dotEnv = [];                    
+    private ?EntityManager $entityManager = null;  
 
     public function __construct()
     {
@@ -45,7 +43,7 @@ class Database
         $this->setEntityManager( \Doctrine\ORM\EntityManager::create($dbParams, $config));
     }
 
-    public static function getInstance()
+    public static function getInstance(): self
     {
         if (self::$instance === null) {
             self::$instance = new self();
@@ -53,7 +51,7 @@ class Database
         return self::$instance;
     }
 
-    public function getPDO()
+    public function getPDO(): ?PDO
     {
         try {
         $pdo = new PDO(
@@ -68,9 +66,10 @@ class Database
         } catch (\PDOException $e) {
             echo "Connection failed: " . $e->getMessage();
         }
+        return null;
     }
 
-    public function getConnection()
+    public function getConnection(): ?\Doctrine\DBAL\Connection
     {
         return $this->connection;
     }
@@ -78,7 +77,7 @@ class Database
     /**
      * Get the value of entityManager
      */ 
-    public function getEntityManager()
+    public function getEntityManager(): ?EntityManager
     {
         return $this->entityManager;
     }
@@ -88,7 +87,7 @@ class Database
      *
      * @return  self
      */ 
-    public function setConnection($connection)
+    public function setConnection(\Doctrine\DBAL\Connection $connection): self
     {
         $this->connection = $connection;
 
@@ -100,12 +99,12 @@ class Database
      *
      * @return  self
      */ 
-    public function setEntityManager($entityManager)
+    public function setEntityManager(EntityManager $entityManager): self
     {
         $this->entityManager = $entityManager;
 
         return $this;
     }
 }
-?>
+
 

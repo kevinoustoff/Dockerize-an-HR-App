@@ -2,48 +2,53 @@
 namespace UHA\Repositories;
 
 use UHA\Services\Database;
+use \PDOStatement;
+use UHA\Models\Employee;
 
-abstract class Repository{
-    protected $table; 
-    protected $database;
-    abstract function getAll();
+abstract class Repository {
+    protected string $table; 
+    protected Database $database;
+    /**
+     * @return Employee[]   // tableau d’objets Employee
+     */
+    abstract public function getAll(): array;
 
-    public function __construct($table) {
+    public function __construct(string $table) {
         $this->database = new Database();
-        $this->table=$table;
+        $this->table = $table;
     }
 
-    public function find($query){
+    public function find(string $query): ?object {
         try {
             $statement = $this->execute($query);
             $result = $statement->fetch(\PDO::FETCH_OBJ);
-            return $result;
+            return $result ?: null;
         } catch (\PDOException $e) {
             echo "Query failed: " . $e->getMessage();
+            return null;
         }
     }
 
-    public function execute($query){
+    public function execute(string $query): PDOStatement {
         $pdo = $this->database->getPDO();
-        $this->table;
+        if ($pdo === null) {
+            throw new \RuntimeException("PDO connection is null");
+        }
+
         $statement = $pdo->prepare($query);
         $statement->execute();
 
         return $statement;
     }
 
-    public function edit($query){
+    public function edit(string $query): bool {
         try {
             $statement = $this->execute($query);
             $rowCount = $statement->rowCount();
-            return $rowCount > 0 ;
+            return $rowCount > 0;
         } catch (\PDOException $e) {
             echo "Query failed: " . $e->getMessage();
+            return false;
         }
     }
-
-
-    
 }
-
-?>

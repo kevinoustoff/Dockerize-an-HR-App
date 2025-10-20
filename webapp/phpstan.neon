@@ -1,0 +1,20 @@
+parameters:
+    level: 6
+    paths:
+        - src
+        - Routes
+
+    # Si tu utilises Composer
+    bootstrapFiles:
+        - vendor/autoload.php
+
+    # Optionnel : ignorer les warnings sur les variables non typées
+    treatPhpDocTypesAsCertain: false
+
+    # Exclure des dossiers inutiles
+    excludePaths:
+        - vendor/*
+        - tests/*
+
+includes:
+    - vendor/phpstan/phpstan/conf/bleedingEdge.neon

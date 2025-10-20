@@ -6,6 +6,12 @@ class DotEnv{
     public function __construct(){
         
     }
+
+    /**
+     * Parse le fichier .env et retourne les variables.
+     *
+     * @return array<string, string>
+     */
     public function parseEnv()
     {
         $data = file_get_contents(dirname(dirname(dirname(__FILE__))).'/.env');

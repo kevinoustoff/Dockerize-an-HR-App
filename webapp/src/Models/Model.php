@@ -1,36 +1,34 @@
 <?php
 namespace UHA\Models;
-use UHA\Services\Database;
 
-abstract class Model{
-   
-   protected $table; 
-   protected $repository;
+use UHA\Repositories\Repository;
 
-   public function  __construct(){
-      
-   }
+abstract class Model
+{
+    protected string $table = '';
+    protected Repository $repository;
 
-   abstract public function getAll();
+     public function __construct()
+    {
+        // Optionnel : initialisation par défaut
+    }
 
-   /**
-    * Get the value of table
-    */ 
-   public function getTable()
-   {
-      return $this->table;
-   }
+    /**
+     * @return array<object>  // ou un type plus précis si possible
+     */
+    public function getAll(): array
+    {
+        return $this->repository->getAll();
+    }
 
-   /**
-    * Set the value of table
-    *
-    * @return  self
-    */ 
-   public function setTable($table)
-   {
-      $this->table = $table;
+    public function getTable(): string
+    {
+        return $this->table;
+    }
 
-      return $this;
-   }
+    public function setTable(string $table): self
+    {
+        $this->table = $table;
+        return $this;
+    }
 }
-?>
