@@ -1,0 +1,6 @@
+run_tests:
+  image: php:8.2-apache
+  before_script:
+    - apt-get update && apt-get install make
+  script:
+    - make analyze
